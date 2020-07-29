@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="LibraryManagementSystem.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryManagementSystem.Views"
+             mc:Ignorable="d" 
+             xmlns:cal="http://www.caliburnproject.org"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="175" />
+            <Setter Property="Margin" Value="0, 0, 50, 0" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Padding" Value="3" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="0, 0, 10, 0" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+
+
+        <Grid Grid.Row="2" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">Login:</TextBlock>
+            <Border Grid.Row="0" Grid.Column="1" 
+                    BorderThickness="1"
+                    BorderBrush="{Binding TopBorderBrush}" 
+                    CornerRadius="10, 10, 0, 0"
+                    Width="189">
+                <TextBox x:Name="Login" 
+                         BorderThickness="0" 
+                         Margin="0" />
+            </Border>
+            
+            <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">Password:</TextBlock>
+            <Border Grid.Row="1" Grid.Column="1" 
+                    BorderThickness="1, 0, 1, 1"
+                    BorderBrush="{Binding BottomBorderBrush}" 
+                    CornerRadius="0, 0, 10, 10"
+                    Width="189">
+                <TextBox x:Name="Password" 
+                         BorderThickness="0" 
+                         Margin="0" />
+            </Border>
+            
+        </Grid>
+
+        <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Border CornerRadius="10, 0, 0, 10" 
+                    BorderBrush="Black" 
+                    BorderThickness="1" 
+                    Height="25"
+                    Width="100">
+                <Button Width="93" 
+                        BorderThickness="0"
+                        HorizontalAlignment="Right"
+                        Cursor="Hand"
+                        Background="Transparent"
+                        Foreground="Black"
+                        cal:Message.Attach="[Event Click] = [Action SignIn()]">Sing in</Button>
+            </Border>
+            <Border CornerRadius="0, 10, 10, 0" 
+                    BorderBrush="Black" 
+                    BorderThickness="1, 1, 0, 1" 
+                    Height="25"
+                    Width="100">
+                <Button Width="93" 
+                        BorderThickness="0"
+                        HorizontalAlignment="Left"
+                        Cursor="Hand"
+                        Background="Transparent"
+                        Foreground="Black"
+                        cal:Message.Attach="[Event Click] = [Action SignUp()]">Register</Button>
+            </Border>
+        </StackPanel>
+        
+
+    </Grid>
+</UserControl>
