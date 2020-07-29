@@ -1,9 +1,9 @@
 # Getting Started
 
-	Download the project
-	Open project with VS
-	Change the connection string to DB in configuration file in DAL project
-	You are ready!
+- Download the project
+- Open project with VS
+- Change the connection string to DB in configuration file in DAL project
+- You are ready!
 	
 # System Implementation
 
