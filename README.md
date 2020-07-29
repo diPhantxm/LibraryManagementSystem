@@ -1,11 +1,11 @@
-# Getting Started
+## Getting Started
 
 - Download the project
 - Open project with VS
 - Change the connection string to DB in configuration file in DAL project
 - You are ready!
 	
-# System Implementation
+## System Implementation
 
 UI is implemented with WPF and Caliburn Micro Framework (MVVM). The Data Access Layer is implemented with Entity Framework 6. 
 
