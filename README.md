@@ -1,3 +1,6 @@
+# Library Management System
+A library management system in .Net Framework using Repository Pattern and UnitOfWork.
+
 ## Getting Started
 
 - Download the project
