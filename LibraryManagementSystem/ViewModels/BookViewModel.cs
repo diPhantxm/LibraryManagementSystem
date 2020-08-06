@@ -1,6 +1,8 @@
 ﻿using LibraryManagementSystem.DAL.Models;
+using LibraryManagementSystem.Models;
 using System;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.ViewModels
 {
@@ -155,5 +157,16 @@ namespace LibraryManagementSystem.ViewModels
             SwitchView(new BooksListViewModel(MainView));
         }
 
+
+
+        public async Task Buy()
+        {
+            await Managers.BookManager.BuyAsync(Book, Managers.UserManager.CurrentUser);
+        }
+
+        public async Task Rent()
+        {
+            await Managers.BookManager.RentAsync(Book, Managers.UserManager.CurrentUser);
+        }
     }
 }

@@ -52,6 +52,15 @@
                 <TextBlock Text="{Binding Dimensions}" />
                 <TextBlock Text="{Binding Price}" />
                 <TextBlock Text="{Binding Description}" />
+                <Button Width="100"
+                        HorizontalAlignment="Left"
+                        Margin="10, 0, 0, 10"
+                        cal:Message.Attach="[Event Click] = [Action Rent()]">Rent</Button>
+                <Button Width="100"
+                        HorizontalAlignment="Left"
+                        Margin="10, 0, 0, 0"
+                        cal:Message.Attach="[Event Click] = [Action Buy()]">Buy</Button>
+               
             </StackPanel>
             
 
