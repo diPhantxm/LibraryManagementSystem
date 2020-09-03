@@ -20,7 +20,7 @@ namespace LibraryManagementSystem.DAL.Repositories
 
         public async Task AddRentAsync(Reader reader, Rent rent)
         {
-            var rentingReader = (await FindByConditionAsync(r => r.Id == reader.Id)).Take(1).SingleOrDefault();
+            var rentingReader = (await FindByConditionAsync(r => r.Id == reader.Id)).Take(1).Single();
 
             if (rentingReader == null) return;
 

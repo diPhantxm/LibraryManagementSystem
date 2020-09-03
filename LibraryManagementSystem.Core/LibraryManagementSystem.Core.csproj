@@ -45,6 +45,7 @@
     <Compile Include="Models\Interfaces\IBookManager.cs" />
     <Compile Include="Models\Interfaces\IUserManager.cs" />
     <Compile Include="Models\Manager.cs" />
+    <Compile Include="Models\SecurityManager.cs" />
     <Compile Include="Models\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

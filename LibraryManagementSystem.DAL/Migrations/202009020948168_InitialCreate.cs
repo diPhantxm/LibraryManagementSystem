@@ -12,6 +12,7 @@
                 c => new
                     {
                         Id = c.Int(nullable: false),
+                        ISBN = c.String(),
                         Title = c.String(),
                         PicPath = c.String(),
                         Description = c.String(),
@@ -19,6 +20,7 @@
                         Publisher = c.String(),
                         Language = c.String(),
                         Category = c.String(),
+                        Amount = c.Int(nullable: false),
                         ReleaseDate = c.DateTime(nullable: false),
                         Pages = c.Short(nullable: false),
                         Price = c.Short(nullable: false),
@@ -67,7 +69,18 @@
                         PhoneNumber = c.String(),
                         Salt = c.Binary(),
                         Iterations = c.Int(nullable: false),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
+                        Role_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Roles", t => t.Role_Id)
+                .Index(t => t.Role_Id);
+            
+            CreateTable(
+                "dbo.Roles",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -76,11 +89,14 @@
         public override void Down()
         {
             DropForeignKey("dbo.Rents", "Reader_Id", "dbo.Readers");
+            DropForeignKey("dbo.Readers", "Role_Id", "dbo.Roles");
             DropForeignKey("dbo.Rents", "Book_Id", "dbo.Books");
             DropForeignKey("dbo.Books", "Id", "dbo.BookDimensions");
+            DropIndex("dbo.Readers", new[] { "Role_Id" });
             DropIndex("dbo.Rents", new[] { "Reader_Id" });
             DropIndex("dbo.Rents", new[] { "Book_Id" });
             DropIndex("dbo.Books", new[] { "Id" });
+            DropTable("dbo.Roles");
             DropTable("dbo.Readers");
             DropTable("dbo.Rents");
             DropTable("dbo.BookDimensions");

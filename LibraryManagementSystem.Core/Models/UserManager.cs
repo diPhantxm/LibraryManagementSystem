@@ -4,6 +4,7 @@ using LibraryManagementSystem.DAL.Interfaces;
 using LibraryManagementSystem.DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
@@ -15,10 +16,11 @@ namespace LibraryManagementSystem.Core.Models
 
         public UserManager(UnitOfWork unitOfWork) : base(unitOfWork)
         {
-
+            RegisterStartAdmin();
         }
 
-        public async Task<IUser> RegisterAsync(string login, string password, string firstName, string lastName, string phoneNumber)
+        public async Task<IUser> RegisterAsync(string login, string password, string firstName, string lastName, string phoneNumber, 
+            Role role = null)
         {
             var rnd = new Random();
 
@@ -26,16 +28,17 @@ namespace LibraryManagementSystem.Core.Models
             var iterations = rnd.Next() % 10 + 1;
 
             // generate salt with specific length
-            var salt = generateSalt(length);
+            var salt = SecurityManager.GenerateSalt(length);
 
             // get Hash with salt
-            var hash = getHash(password, salt, iterations);
+            var hash = SecurityManager.GetHash(password, salt, iterations);
             
             // set hash of password
             var newUser = new Reader(login, hash, firstName, lastName,
-                phoneNumber, salt, iterations);
+                phoneNumber, salt, iterations, role);
 
             // Add new user to database
+            if (role == null) role = await Database.Roles.GetRoleAsync("Reader");
             await Database.Users.AddAsync(newUser);
 
             return newUser;
@@ -52,7 +55,7 @@ namespace LibraryManagementSystem.Core.Models
             var iterations = await Database.Users.GetIterationsAsync(login);
 
             // get user's password hash
-            var hash = getHash(password, salt, iterations).ToString();
+            var hash = SecurityManager.GetHash(password, salt, iterations).ToString();
 
             // set current user
             CurrentUser = await Database.Users.AuthenticateAsync(login, hash);
@@ -66,32 +69,36 @@ namespace LibraryManagementSystem.Core.Models
 
         public async Task EditAsync(Reader user)
         {
-            await Database.Users.Update(user);
+            var userToUpdate = Database.Users.FindByCondition(u => u.Id == user.Id).Take(1).Single();
+            userToUpdate = user;
+            await Database.Users.SaveAsync();
         }
 
-
-
-        private byte[] generateSalt(int length)
+        private void RegisterStartAdmin()
         {
-            var bytes = new byte[length];
+            var adminFound = Database.Users.FindByCondition(user => user.Login == "Admin");
 
-            using (var rng = new RNGCryptoServiceProvider())
+            if (adminFound.Count() > 0) return;
+            else
             {
-                rng.GetBytes(bytes);
+                try
+                {
+                    var salt = SecurityManager.GenerateSalt(20);
+                    var hash = SecurityManager.GetHash("test", salt, 5);
+
+                    var adminRole = Database.Roles.FindByCondition(role => role.Name == "Admin").Take(1).Single();
+                    var admin = new Reader("Admin", hash, "Admin", "Admin", "", salt, 5, adminRole);
+                    Database.Users.Add(admin);
+                }
+                catch (Exception)
+                {
+
+                }
             }
 
-            return bytes;
+            
+            
         }
-        private string getHash(string password, byte[] salt, int iterations)
-        {
-            string hash = String.Empty;
 
-            using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterations))
-            {
-                hash = Convert.ToBase64String(deriveBytes.GetBytes(salt.Length));
-            }
-
-            return hash;
-        }
     }
 }

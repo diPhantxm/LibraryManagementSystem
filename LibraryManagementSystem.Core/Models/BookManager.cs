@@ -18,12 +18,14 @@ namespace LibraryManagementSystem.Core.Models
         {
             // TODO: implement card payment
 
-            await Database.Books.DeleteAsync(book);
+            await Database.Books.TakeOne(book);
+
+            await Database.Books.SaveAsync();
         }
 
         public async Task GiftAsync(Book book)
         {
-            await Database.Books.AddAsync(book);
+            await Database.Books.ReturnOne(book);
         }
 
         public async Task RentAsync(Book book, Reader user)
@@ -32,7 +34,7 @@ namespace LibraryManagementSystem.Core.Models
 
             await Database.Rents.AddAsync(rent);
             await Database.Users.AddRentAsync(user, rent);
-            await Database.Books.ChangeAvailability(book);
+            await Database.Books.TakeOne(book);
         }
 
         public async Task ReturnAsync(Book book, Reader user)
@@ -45,7 +47,7 @@ namespace LibraryManagementSystem.Core.Models
             var rent = reader.Rents.Where(r => r.Book_Id == book.Id && r.Reader_Id == user.Id).SingleOrDefault();
 
             await Database.Rents.DeleteAsync(rent);
-            await Database.Books.ChangeAvailability(book);
+            await Database.Books.ReturnOne(book);
         }
     }
 }

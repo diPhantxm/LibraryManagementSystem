@@ -13,5 +13,6 @@ namespace LibraryManagementSystem.Models
         public static UnitOfWork UnitOfWork;
         public static BookManager BookManager;
         public static UserManager UserManager;
+        public static SecurityManager SecutiryManager;
     }
 }

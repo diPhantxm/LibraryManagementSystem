@@ -75,6 +75,7 @@ namespace LibraryManagementSystem.ViewModels
                     if (Managers.UserManager.CurrentUser != null)
                     {
                         SwitchView(new BooksListViewModel(MainView));
+                        MainView.IsAdmin = Managers.UserManager.CurrentUser.Role.ToString() == "Admin" ? true : false;
                     }
                     else
                     {

@@ -12,6 +12,18 @@ namespace LibraryManagementSystem.ViewModels
     public class MainViewModel : Conductor<Screen>.Collection.OneActive
     {
         private Screen _currentView;
+        private bool _isAdmin = false;
+
+        public bool IsAdmin
+        {
+            get { return _isAdmin; }
+            set
+            {
+                _isAdmin = value;
+                NotifyOfPropertyChange(() => IsAdmin);
+            }
+        }
+
 
         public Screen CurrentView
         {
@@ -28,10 +40,17 @@ namespace LibraryManagementSystem.ViewModels
         {
             CurrentView = new LoginViewModel(this);
             ActivateItem(CurrentView);
-       
+
             Managers.UnitOfWork = new DAL.UnitOfWork(new DAL.LibraryDbContext());
             Managers.UserManager = new Core.Models.UserManager(Managers.UnitOfWork);
             Managers.BookManager = new Core.Models.BookManager(Managers.UnitOfWork);
+            Managers.SecutiryManager = new Core.Models.SecurityManager(Managers.UnitOfWork);
+        }
+
+        public void OpenAdminPanel()
+        {
+            CurrentView = new AdminPanelViewModel(this);
+            ActivateItem(CurrentView);
         }
     }
 }

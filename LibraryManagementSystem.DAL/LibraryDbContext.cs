@@ -9,6 +9,7 @@ namespace LibraryManagementSystem.DAL
         public DbSet<Book> Books { get; set; }
         public DbSet<Reader> Readers { get; set; }
         public DbSet<Rent> Rents { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         public LibraryDbContext() : base("DbConnectionString")
         {
@@ -29,5 +30,6 @@ namespace LibraryManagementSystem.DAL
 
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }

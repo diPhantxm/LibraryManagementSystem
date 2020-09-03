@@ -14,6 +14,33 @@ namespace LibraryManagementSystem.DAL.Repositories
             
         }
 
+        public new async Task AddAsync(Book book)
+        {
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    var find = FindByCondition(b => b.ISBN == book.ISBN);
+                    if (find.Count() > 0)
+                    {
+                        var bookToUpdate = find.Take(1).Single();
+                        bookToUpdate.Amount++;
+                    }
+                    else
+                    {
+                        _context.Books.Add(book);
+                    }
+
+                    await SaveAsync();
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
+        }
+
         public async Task<IEnumerable<Book>> FindByNameAsync(string[] keyWords)
         {
             return await Task.Run(() =>
@@ -56,9 +83,33 @@ namespace LibraryManagementSystem.DAL.Repositories
             });
         }
 
-        public async Task ChangeAvailability(Book book)
+        public async Task TakeOne(Book book)
         {
-            (await FindByConditionAsync(b => b.Id == book.Id)).Take(1).Single().ChangeAvailability();
+            var bookToUpdate = (await FindByConditionAsync(b => b.Id == book.Id)).Take(1).Single();
+            if (bookToUpdate.Amount > 1)
+            {
+                bookToUpdate.Amount--;
+            }
+            else
+            {
+                bookToUpdate.ChangeAvailability();
+            }
+            
+            await SaveAsync();
+        }
+
+        public async Task ReturnOne(Book book)
+        {
+            var bookToUpdate = (await FindByConditionAsync(b => b.Id == book.Id)).Take(1).Single();
+            if (!bookToUpdate.Available)
+            {
+                bookToUpdate.ChangeAvailability();
+            }
+            else
+            {
+                bookToUpdate.Amount++;
+            }
+
             await SaveAsync();
         }
     }

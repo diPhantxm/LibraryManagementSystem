@@ -23,8 +23,9 @@ namespace LibraryManagementSystem.DAL.Models
         public int Iterations { get; set; }
 
         public virtual ICollection<Rent> Rents { get; set; }
+        public virtual Role Role { get; set; }
 
-        public Reader(string login, string password, string firstName, string lastName, string phoneNumber, byte[] salt, int iterations)
+        public Reader(string login, string password, string firstName, string lastName, string phoneNumber, byte[] salt, int iterations, Role role)
         {
             Login = login;
             Password = password;
@@ -33,6 +34,7 @@ namespace LibraryManagementSystem.DAL.Models
             PhoneNumber = phoneNumber;
             Salt = salt;
             Iterations = iterations;
+            Role = role;
 
             Rents = new List<Rent>();
         }
@@ -40,5 +42,6 @@ namespace LibraryManagementSystem.DAL.Models
         {
             Rents = new List<Rent>();
         }
+
     }
 }

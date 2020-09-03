@@ -13,7 +13,7 @@ namespace LibraryManagementSystem.Core.Models.Interfaces
         Reader CurrentUser { get; }
 
         Task<IUser> AuthenticateAsync(string login, string password);
-        Task<IUser> RegisterAsync(string login, string password, string firstName, string lastName, string phoneNumber);
+        Task<IUser> RegisterAsync(string login, string password, string firstName, string lastName, string phoneNumber, Role role);
         Task EditAsync(Reader user);
         Task DeleteAsync();
     }

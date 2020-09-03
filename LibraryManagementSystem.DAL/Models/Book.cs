@@ -9,6 +9,8 @@ namespace LibraryManagementSystem.DAL.Models
     {
         public int Id { get; set; }
 
+        public string   ISBN { get; set; }
+
         public string   Title { get; set; }
 
         public string   PicPath { get; set; }
@@ -22,6 +24,8 @@ namespace LibraryManagementSystem.DAL.Models
         public string   Language { get; set; }
 
         public string   Category { get; set; }
+
+        public int      Amount { get; set; }
 
         public DateTime ReleaseDate { get; set; }
 
@@ -40,7 +44,7 @@ namespace LibraryManagementSystem.DAL.Models
         public virtual Rent Rent { get; set; }
 
 
-        public Book(string title, string picPath, string description, string author, string publisher, string language, string category, 
+        public Book(string title, string isbn, int amount, string picPath, string description, string author, string publisher, string language, string category, 
             DateTime releaseDate, short pages, short price, float rating, float weight, BookDimensions dimensions, bool available)
         {
             #region Input Check
@@ -103,6 +107,8 @@ namespace LibraryManagementSystem.DAL.Models
             #endregion
 
             Title = title;
+            ISBN = isbn;
+            Amount = amount;
             PicPath = picPath;
             Description = description;
             Author = author;

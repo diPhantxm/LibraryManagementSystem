@@ -1,4 +1,6 @@
-﻿namespace LibraryManagementSystem.DAL.Interfaces
+﻿using LibraryManagementSystem.DAL.Models;
+
+namespace LibraryManagementSystem.DAL.Interfaces
 {
     public interface IUser
     {
@@ -9,5 +11,6 @@
         string PhoneNumber { get; }
         byte[] Salt { get; }
         int Iterations { get; }
+        Role Role { get; }
     }
 }

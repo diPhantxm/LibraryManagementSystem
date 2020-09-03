@@ -147,6 +147,7 @@ namespace LibraryManagementSystem.ViewModels
                 if (user != null)
                 {
                     SwitchView(new BooksListViewModel(MainView));
+                    MainView.IsAdmin = user.Role.Name == "Admin" ? true : false;
                 }
             }
             catch (Exception)

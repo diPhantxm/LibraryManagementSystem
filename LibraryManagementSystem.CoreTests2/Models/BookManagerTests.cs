@@ -43,7 +43,9 @@ namespace LibraryManagementSystem.Core.Models.Tests
                 var unitOfWork = new UnitOfWork(new LibraryDbContext());
                 var bm = new BookManager(unitOfWork);
 
-                await bm.GiftAsync(new Book(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), DateTime.Now, 1, 11, 12, 11, new DAL.Models.BookDimensions(5, 5, 5), true));
+                var isbn = Guid.NewGuid().ToString();
+                await bm.GiftAsync(new Book(Guid.NewGuid().ToString(), isbn, 1, Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), DateTime.Now, 1, 11, 12, 11, new DAL.Models.BookDimensions(5, 5, 5), true));
+                await bm.GiftAsync(new Book(Guid.NewGuid().ToString(), isbn, 1, Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), DateTime.Now, 1, 11, 12, 11, new DAL.Models.BookDimensions(5, 5, 5), true));
 
                 Assert.IsTrue(true);
             }

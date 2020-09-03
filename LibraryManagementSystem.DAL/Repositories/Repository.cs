@@ -18,15 +18,31 @@ namespace LibraryManagementSystem.DAL.Repositories
             _context = context;
         }
 
+        public async Task<DbSet<T>> GetDbSetAsync()
+        {
+            return await Task.Run(() => { return _context.Set<T>(); });
+        }
+
         public async Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> condition)
         {
             return await _context.Set<T>().Where(condition).ToListAsync();
+        }
+
+        public IEnumerable<T> FindByCondition(Expression<Func<T, bool>> condition)
+        {
+            return _context.Set<T>().Where(condition).ToList();
         }
 
         public async Task AddAsync(T Entity)
         {
             await Task.Run(() => _context.Set<T>().Add(Entity));
             await SaveAsync();
+        }
+
+        public void Add(T Entity)
+        {
+            _context.Set<T>().Add(Entity);
+            _context.SaveChanges();
         }
 
         public async Task DeleteAsync(T Entity)
@@ -46,12 +62,6 @@ namespace LibraryManagementSystem.DAL.Repositories
         public async Task<int> CountAllAsync()
         {
             return await _context.Set<T>().CountAsync();
-        }
-
-        public async Task Update(T Entity)
-        {
-            _context.Entry<T>(Entity).CurrentValues.SetValues(Entity);
-            await SaveAsync();
         }
 
         public async Task SaveAsync()
