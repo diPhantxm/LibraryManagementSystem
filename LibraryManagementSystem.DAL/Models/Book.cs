@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryManagementSystem.DAL.Models
 {
-    public class Book : IEntity, IBook
+    public class Book : IEntity
     {
         public int Id { get; set; }
 
@@ -31,11 +31,11 @@ namespace LibraryManagementSystem.DAL.Models
 
         public short    Pages { get; set; }
 
-        public short    Price { get; set; }
+        public double    Price { get; set; }
 
-        public float    Rating { get; set; }
+        public double Rating { get; set; }
 
-        public float    Weight { get; set; }
+        public double Weight { get; set; }
 
         public virtual BookDimensions Dimensions { get; set; }
 
@@ -45,7 +45,7 @@ namespace LibraryManagementSystem.DAL.Models
 
 
         public Book(string title, string isbn, int amount, string picPath, string description, string author, string publisher, string language, string category, 
-            DateTime releaseDate, short pages, short price, float rating, float weight, BookDimensions dimensions, bool available)
+            DateTime releaseDate, short pages, float price, float rating, float weight, BookDimensions dimensions, bool available)
         {
             #region Input Check
 

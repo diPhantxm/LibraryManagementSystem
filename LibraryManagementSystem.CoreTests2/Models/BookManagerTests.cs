@@ -29,7 +29,7 @@ namespace LibraryManagementSystem.Core.Models.Tests
 
                 Assert.IsTrue(true);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }

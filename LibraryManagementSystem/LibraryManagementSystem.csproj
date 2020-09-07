@@ -60,13 +60,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Managers.cs" />
+    <Compile Include="ViewModels\AddDialogViewModel.cs" />
     <Compile Include="ViewModels\AdminPanelViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BooksListViewModel.cs" />
     <Compile Include="ViewModels\BookViewModel.cs" />
+    <Compile Include="ViewModels\IdToUpdateDialogViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\RemoveDialogViewModel.cs" />
+    <Compile Include="ViewModels\UpdateDialogViewModel.cs" />
+    <Compile Include="Views\AddDialogView.xaml.cs">
+      <DependentUpon>AddDialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdminPanelView.xaml.cs">
       <DependentUpon>AdminPanelView.xaml</DependentUpon>
     </Compile>
@@ -76,8 +83,8 @@
     <Compile Include="Views\BookView.xaml.cs">
       <DependentUpon>BookView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\IdBoxDialog.xaml.cs">
-      <DependentUpon>IdBoxDialog.xaml</DependentUpon>
+    <Compile Include="Views\IdToUpdateDialogView.xaml.cs">
+      <DependentUpon>IdToUpdateDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -87,6 +94,12 @@
     </Compile>
     <Compile Include="Views\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RemoveDialogView.xaml.cs">
+      <DependentUpon>RemoveDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateDialogView.xaml.cs">
+      <DependentUpon>UpdateDialogView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +148,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\AddDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AdminPanelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,7 +164,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\IdBoxDialog.xaml">
+    <Page Include="Views\IdToUpdateDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,6 +177,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RemoveDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UpdateDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -62,7 +62,7 @@ namespace LibraryManagementSystem.Core.Models.Tests
                 var um = new UserManager(unitOfWork);
 
                 await um.AuthenticateAsync("Test", "123456");
-                await um.DeleteAsync();
+                await um.DeleteAsync(um.CurrentUser.Id);
 
                 Assert.IsTrue(true);
             }

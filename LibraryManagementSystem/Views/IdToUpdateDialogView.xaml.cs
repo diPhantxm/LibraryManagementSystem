@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace LibraryManagementSystem.Views
 {
     /// <summary>
-    /// Interaction logic for IdBoxDialog.xaml
+    /// Interaction logic for IdToUpdateDialogView.xaml
     /// </summary>
-    public partial class IdBoxDialog : Window
+    public partial class IdToUpdateDialogView : UserControl
     {
-        public IdBoxDialog()
+        public IdToUpdateDialogView()
         {
             InitializeComponent();
         }

@@ -2,6 +2,8 @@
 using LibraryManagementSystem.DAL.Repositories.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 
 namespace LibraryManagementSystem.DAL.Repositories
 {
@@ -75,6 +77,20 @@ namespace LibraryManagementSystem.DAL.Repositories
                     return user.Take(1).SingleOrDefault().Iterations;
                 }
             });
+        }
+
+        public async Task UpdateAsync(Reader updatedReader)
+        {
+            var readersToUpdate = FindByCondition(r => r.Id == updatedReader.Id);
+            if (readersToUpdate.Count() == 0 || readersToUpdate.Count() > 1)
+            {
+                throw new KeyNotFoundException("Reader-To-Update not found.");
+            }
+            var readerToUpdate = readersToUpdate.Single();
+
+            readerToUpdate = updatedReader;
+
+            await SaveAsync();
         }
     }
 }

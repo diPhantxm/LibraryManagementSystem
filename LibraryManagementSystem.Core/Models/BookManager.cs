@@ -25,7 +25,19 @@ namespace LibraryManagementSystem.Core.Models
 
         public async Task GiftAsync(Book book)
         {
-            await Database.Books.ReturnOne(book);
+            var bookFindResult = Database.Books.FindByCondition(b => b.Id == book.Id);
+            if (bookFindResult.Count() == 0)
+            {
+                await Database.Books.AddAsync(book);
+            }
+            else
+            {
+                var foundBook = bookFindResult.Single();
+                foundBook.Available = true;
+                foundBook.Amount++;
+            }
+
+            await Database.Books.SaveAsync();
         }
 
         public async Task RentAsync(Book book, Reader user)
@@ -48,6 +60,45 @@ namespace LibraryManagementSystem.Core.Models
 
             await Database.Rents.DeleteAsync(rent);
             await Database.Books.ReturnOne(book);
+        }
+
+        public async Task DeleteByIdAsync(int id)
+        {
+            var books = Database.Books.FindByCondition(b => b.Id == id);
+            if (books.Count() == 0)
+            {
+                return;
+            }
+
+            var book = books.Single();
+
+            await Database.Books.DeleteAsync(book);
+        }
+
+        public async Task DeleteByTitleAsync(string title)
+        {
+            var books = Database.Books.FindByCondition(b => b.Title == title);
+            if (books.Count() == 0)
+            {
+                return;
+            }
+
+            var book = books.Single();
+
+            await Database.Books.DeleteAsync(book);
+        }
+
+        public async Task DeleteByISBNAsync(string isbn)
+        {
+            var books = Database.Books.FindByCondition(b => b.ISBN == isbn);
+            if (books.Count() == 0)
+            {
+                return;
+            }
+
+            var book = books.Single();
+
+            await Database.Books.DeleteAsync(book);
         }
     }
 }

@@ -23,9 +23,9 @@
                         Amount = c.Int(nullable: false),
                         ReleaseDate = c.DateTime(nullable: false),
                         Pages = c.Short(nullable: false),
-                        Price = c.Short(nullable: false),
-                        Rating = c.Single(nullable: false),
-                        Weight = c.Single(nullable: false),
+                        Price = c.Double(nullable: false),
+                        Rating = c.Double(nullable: false),
+                        Weight = c.Double(nullable: false),
                         Available = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)

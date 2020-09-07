@@ -15,6 +15,7 @@ namespace LibraryManagementSystem.Core.Models.Interfaces
         Task<IUser> AuthenticateAsync(string login, string password);
         Task<IUser> RegisterAsync(string login, string password, string firstName, string lastName, string phoneNumber, Role role);
         Task EditAsync(Reader user);
-        Task DeleteAsync();
+        Task DeleteAsync(int id);
+        Task DeleteAsync(string login);
     }
 }

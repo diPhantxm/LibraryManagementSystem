@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Linq;
 using System;
 using System.Linq.Expressions;
-using LibraryManagementSystem.DAL.Models;
 using System.Data.Entity;
 
 namespace LibraryManagementSystem.DAL.Repositories

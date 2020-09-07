@@ -62,9 +62,23 @@ namespace LibraryManagementSystem.Core.Models
             return CurrentUser;
         }
 
-        public async Task DeleteAsync()
+        public async Task DeleteAsync(int id)
         {
-            await Database.Users.DeleteAsync(CurrentUser);
+            try
+            {
+                var userToDelete = (await Database.Users.FindByConditionAsync(u => u.Id == id)).Take(1).Single();
+                await Database.Users.DeleteAsync(userToDelete);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task DeleteAsync(string login)
+        {
+            var userToDelete = (await Database.Users.FindByConditionAsync(u => u.Login == login)).Take(1).Single();
+            await Database.Users.DeleteAsync(userToDelete);
         }
 
         public async Task EditAsync(Reader user)

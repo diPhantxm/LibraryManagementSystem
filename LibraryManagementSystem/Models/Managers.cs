@@ -14,5 +14,6 @@ namespace LibraryManagementSystem.Models
         public static BookManager BookManager;
         public static UserManager UserManager;
         public static SecurityManager SecutiryManager;
+        public static RentManager RentManager;
     }
 }

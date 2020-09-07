@@ -83,6 +83,19 @@ namespace LibraryManagementSystem.DAL.Repositories
             });
         }
 
+        public async Task UpdateAsync(Book updatedBook)
+        {
+            var booksToUpdate = FindByCondition(b => b.Id == updatedBook.Id);
+            if (booksToUpdate.Count() == 0 || booksToUpdate.Count() > 1)
+            {
+                throw new KeyNotFoundException("Book-To-Update not found.");
+            }
+            var bookToUpdate = booksToUpdate.Single();
+
+            bookToUpdate = updatedBook;
+            await SaveAsync();
+        }
+
         public async Task TakeOne(Book book)
         {
             var bookToUpdate = (await FindByConditionAsync(b => b.Id == book.Id)).Take(1).Single();
@@ -100,7 +113,7 @@ namespace LibraryManagementSystem.DAL.Repositories
 
         public async Task ReturnOne(Book book)
         {
-            var bookToUpdate = (await FindByConditionAsync(b => b.Id == book.Id)).Take(1).Single();
+            var bookToUpdate = FindByCondition(b => b.Id == book.Id).Take(1).Single();
             if (!bookToUpdate.Available)
             {
                 bookToUpdate.ChangeAvailability();

@@ -1,9 +1,13 @@
 ﻿using LibraryManagementSystem.DAL.Interfaces;
 using LibraryManagementSystem.DAL.Models;
 using LibraryManagementSystem.DAL.Repositories;
+using LibraryManagementSystem.DAL.Repositories.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace LibraryManagementSystem.DAL
 {
@@ -32,6 +36,11 @@ namespace LibraryManagementSystem.DAL
             {
                 Roles.Add(new Role("Reader"));
             }
+        }
+
+        public IEnumerable<string> GetTableNames()
+        {
+            return DbContext.GetType().GetProperties().Select(prop => prop.Name);
         }
 
         public void Dispose()

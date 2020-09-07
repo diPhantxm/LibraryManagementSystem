@@ -49,6 +49,6 @@
             <Button Height="30" Width="65" Margin="0, 10, 0, 0"
                     cal:Message.Attach="[Event Click] = [Action Update()]">Update</Button>
         </StackPanel>
-        
+
     </Grid>
 </UserControl>

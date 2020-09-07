@@ -45,6 +45,7 @@ namespace LibraryManagementSystem.ViewModels
             Managers.UserManager = new Core.Models.UserManager(Managers.UnitOfWork);
             Managers.BookManager = new Core.Models.BookManager(Managers.UnitOfWork);
             Managers.SecutiryManager = new Core.Models.SecurityManager(Managers.UnitOfWork);
+            Managers.RentManager = new Core.Models.RentManager(Managers.UnitOfWork);
         }
 
         public void OpenAdminPanel()
