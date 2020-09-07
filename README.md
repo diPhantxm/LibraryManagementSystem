@@ -7,6 +7,10 @@ A library management system in .Net Framework using Repository Pattern and UnitO
 - Open project with VS
 - Change the connection string to DB in configuration file in DAL project
 - You are ready!
+
+## Default Admin User:
+	Login: Admin
+	Password: test
 	
 ## System Implementation
 
